@@ -25,29 +25,56 @@ resource "azurerm_key_vault" "main" {
 }
 
 # ============================================
-# MANAGED IDENTITY - For container apps
+# MANAGED IDENTITY - Frontend
 # ============================================
-resource "azurerm_user_assigned_identity" "container_apps" {
-  name                = "mi-${var.app_name}-${var.environment}"
+resource "azurerm_user_assigned_identity" "frontend" {
+  name                = "mi-${var.app_name}-frontend-${var.environment}"
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
 }
 
 # ============================================
-# RBAC - Managed Identity access to Key Vault secrets
+# MANAGED IDENTITY - Backend
 # ============================================
-resource "azurerm_role_assignment" "mi_keyvault_secrets" {
-  scope              = azurerm_key_vault.main.id
-  role_definition_name = "Key Vault Secrets User"
-  principal_id       = azurerm_user_assigned_identity.container_apps.principal_id
+resource "azurerm_user_assigned_identity" "backend" {
+  name                = "mi-${var.app_name}-backend-${var.environment}"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
 }
 
 # ============================================
-# RBAC - Managed Identity access to ACR
+# RBAC - Frontend MI access to Key Vault secrets
 # ============================================
-resource "azurerm_role_assignment" "mi_acr_pull" {
+resource "azurerm_role_assignment" "frontend_keyvault_secrets" {
+  scope              = azurerm_key_vault.main.id
+  role_definition_name = "Key Vault Secrets User"
+  principal_id       = azurerm_user_assigned_identity.frontend.principal_id
+}
+
+# ============================================
+# RBAC - Frontend MI access to ACR
+# ============================================
+resource "azurerm_role_assignment" "frontend_acr_pull" {
   scope              = data.azurerm_container_registry.acr.id
   role_definition_name = "AcrPull"
-  principal_id       = azurerm_user_assigned_identity.container_apps.principal_id
+  principal_id       = azurerm_user_assigned_identity.frontend.principal_id
+}
+
+# ============================================
+# RBAC - Backend MI access to Key Vault secrets
+# ============================================
+resource "azurerm_role_assignment" "backend_keyvault_secrets" {
+  scope              = azurerm_key_vault.main.id
+  role_definition_name = "Key Vault Secrets User"
+  principal_id       = azurerm_user_assigned_identity.backend.principal_id
+}
+
+# ============================================
+# RBAC - Backend MI access to ACR
+# ============================================
+resource "azurerm_role_assignment" "backend_acr_pull" {
+  scope              = data.azurerm_container_registry.acr.id
+  role_definition_name = "AcrPull"
+  principal_id       = azurerm_user_assigned_identity.backend.principal_id
 }
 
