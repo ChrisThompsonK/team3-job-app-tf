@@ -16,11 +16,3 @@ resource "azurerm_key_vault" "main" {
   rbac_authorization_enabled = true
 }
 
-# ============================================
-# RBAC - Current user has admin access
-# ============================================
-resource "azurerm_role_assignment" "current_user_admin" {
-  scope              = azurerm_key_vault.main.id
-  role_definition_name = "Key Vault Administrator"
-  principal_id       = data.azurerm_client_config.current.object_id
-}
