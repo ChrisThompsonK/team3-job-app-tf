@@ -4,6 +4,14 @@ resource "azurerm_resource_group" "main" {
 }
 
 # ============================================
+# DATA SOURCE - Get existing ACR
+# ============================================
+data "azurerm_container_registry" "acr" {
+  name                = var.acr_name
+  resource_group_name = var.acr_resource_group_name
+}
+
+# ============================================
 # KEY VAULT - For storing application secrets
 # ============================================
 resource "azurerm_key_vault" "main" {
@@ -38,7 +46,7 @@ resource "azurerm_role_assignment" "mi_keyvault_secrets" {
 # RBAC - Managed Identity access to ACR
 # ============================================
 resource "azurerm_role_assignment" "mi_acr_pull" {
-  scope              = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/aiacademy-rg/providers/Microsoft.ContainerRegistry/registries/aiacademy25"
+  scope              = data.azurerm_container_registry.acr.id
   role_definition_name = "AcrPull"
   principal_id       = azurerm_user_assigned_identity.container_apps.principal_id
 }
