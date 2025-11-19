@@ -22,3 +22,23 @@ output "key_vault_name" {
   value       = azurerm_key_vault.main.name
   description = "Key Vault name"
 }
+
+output "frontend_managed_identity_id" {
+  value       = azurerm_user_assigned_identity.frontend.id
+  description = "Frontend Managed Identity ID"
+}
+
+output "frontend_managed_identity_principal_id" {
+  value       = azurerm_user_assigned_identity.frontend.principal_id
+  description = "Frontend Managed Identity Principal ID"
+}
+
+output "backend_managed_identity_id" {
+  value       = azurerm_user_assigned_identity.backend.id
+  description = "Backend Managed Identity ID"
+}
+
+output "backend_managed_identity_principal_id" {
+  value       = azurerm_user_assigned_identity.backend.principal_id
+  description = "Backend Managed Identity Principal ID"
+}

@@ -15,3 +15,15 @@ variable "region" {
   description = "Azure region"
   default     = "UK South"
 }
+
+variable "acr_name" {
+  type        = string
+  description = "Azure Container Registry name"
+  default     = "aiacademy25"
+}
+
+variable "acr_resource_group_name" {
+  type        = string
+  description = "Resource group name where ACR exists"
+  default     = "aiacademy-rg"
+}

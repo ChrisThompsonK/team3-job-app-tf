@@ -4,6 +4,14 @@ resource "azurerm_resource_group" "main" {
 }
 
 # ============================================
+# DATA SOURCE - Get existing ACR
+# ============================================
+data "azurerm_container_registry" "acr" {
+  name                = var.acr_name
+  resource_group_name = var.acr_resource_group_name
+}
+
+# ============================================
 # KEY VAULT - For storing application secrets
 # ============================================
 resource "azurerm_key_vault" "main" {
