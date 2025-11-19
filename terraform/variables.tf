@@ -63,5 +63,3 @@ variable "backend_memory" {
   description = "Memory allocation for backend"
   default     = "0.5Gi"
 }
-
-```
