@@ -27,3 +27,41 @@ variable "acr_resource_group_name" {
   description = "Resource group name where ACR exists"
   default     = "container-registry"
 }
+
+variable "frontend_image" {
+  type        = string
+  description = "Frontend container image URL"
+  default     = "aiacademy25.azurecr.io/team3-job-app-frontend:latest"
+}
+
+variable "backend_image" {
+  type        = string
+  description = "Backend container image URL"
+  default     = "aiacademy25.azurecr.io/team3-job-app-backend:latest"
+}
+
+variable "frontend_cpu" {
+  type        = string
+  description = "CPU allocation for frontend"
+  default     = "0.25"
+}
+
+variable "frontend_memory" {
+  type        = string
+  description = "Memory allocation for frontend"
+  default     = "0.5Gi"
+}
+
+variable "backend_cpu" {
+  type        = string
+  description = "CPU allocation for backend"
+  default     = "0.25"
+}
+
+variable "backend_memory" {
+  type        = string
+  description = "Memory allocation for backend"
+  default     = "0.5Gi"
+}
+
+```

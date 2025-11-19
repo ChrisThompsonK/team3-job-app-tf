@@ -52,3 +52,34 @@ output "container_app_environment_name" {
   value       = azurerm_container_app_environment.main.name
   description = "Container App Environment name"
 }
+
+output "frontend_container_app_id" {
+  value       = azurerm_container_app.frontend.id
+  description = "Frontend Container App ID"
+}
+
+output "frontend_container_app_name" {
+  value       = azurerm_container_app.frontend.name
+  description = "Frontend Container App name"
+}
+
+output "frontend_container_app_fqdn" {
+  value       = azurerm_container_app.frontend.ingress[0].fqdn
+  description = "Frontend Container App public FQDN"
+}
+
+output "backend_container_app_id" {
+  value       = azurerm_container_app.backend.id
+  description = "Backend Container App ID"
+}
+
+output "backend_container_app_name" {
+  value       = azurerm_container_app.backend.name
+  description = "Backend Container App name"
+}
+
+output "backend_container_app_fqdn" {
+  value       = azurerm_container_app.backend.ingress[0].fqdn
+  description = "Backend Container App internal FQDN"
+}
+
