@@ -24,3 +24,12 @@ resource "azurerm_key_vault" "main" {
   enable_rbac_authorization   = true
 }
 
+# ============================================
+# CONTAINER APP ENVIRONMENT
+# ============================================
+resource "azurerm_container_app_environment" "main" {
+  name                = "cae-${var.app_name}-${var.environment}"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+}
+
