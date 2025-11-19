@@ -25,5 +25,5 @@ variable "acr_name" {
 variable "acr_resource_group_name" {
   type        = string
   description = "Resource group name where ACR exists"
-  default     = "aiacademy-rg"
+  default     = "container-registry"
 }
