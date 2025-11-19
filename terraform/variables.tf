@@ -1,56 +1,67 @@
 variable "environment" {
-  type    = string
-  default = "dev"
+  type        = string
+  description = "Environment name (dev, staging, prod)"
+  default     = "dev"
 }
 
 variable "app_name" {
-  type    = string
-  default = "team3-job-app"
+  type        = string
+  description = "Application name"
+  default     = "team3-job-app"
 }
 
 variable "region" {
-  type    = string
-  default = "UK South"
+  type        = string
+  description = "Azure region"
+  default     = "UK South"
 }
 
 variable "acr_name" {
-  type    = string
-  default = "aiacademy25"
+  type        = string
+  description = "Azure Container Registry name"
+  default     = "aiacademy25"
 }
 
 variable "acr_resource_group_name" {
-  type    = string
-  default = "container-registry"
+  type        = string
+  description = "Resource group name where ACR exists"
+  default     = "container-registry"
 }
 
 variable "frontend_image" {
-  type    = string
-  default = "aiacademy25.azurecr.io/team3-job-app-frontend:latest"
+  type        = string
+  description = "Frontend container image URL"
+  default     = "aiacademy25.azurecr.io/team3-job-app-frontend:latest"
 }
 
 variable "backend_image" {
-  type    = string
-  default = "aiacademy25.azurecr.io/team3-job-app-backend:latest"
+  type        = string
+  description = "Backend container image URL"
+  default     = "aiacademy25.azurecr.io/team3-job-app-backend:latest"
 }
 
 variable "frontend_cpu" {
-  type    = string
-  default = "0.25"
+  type        = string
+  description = "CPU allocation for frontend"
+  default     = "0.25"
 }
 
 variable "frontend_memory" {
-  type    = string
-  default = "0.5Gi"
+  type        = string
+  description = "Memory allocation for frontend"
+  default     = "0.5Gi"
 }
 
 variable "backend_cpu" {
-  type    = string
-  default = "0.25"
+  type        = string
+  description = "CPU allocation for backend"
+  default     = "0.25"
 }
 
 variable "backend_memory" {
-  type    = string
-  default = "0.5Gi"
+  type        = string
+  description = "Memory allocation for backend"
+  default     = "0.5Gi"
 }
 
 ```
